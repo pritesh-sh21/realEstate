@@ -47,7 +47,7 @@ class PropertyGridForRent extends Component {
                   </div>
                   <div className="col-md-3 mt-2 mt-md-0 align-self-center">
                     <div className="single-select-inner">
-                      <select defaultValue={1} >
+                      <select defaultValue={1}>
                         <option value={1}>Price: High to Low</option>
                         <option value={2}>Price: Low to High</option>
                         <option value={3}>Area: High to Low</option>

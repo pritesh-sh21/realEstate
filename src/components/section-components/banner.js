@@ -14,10 +14,7 @@ class Banner extends Component {
             <div className="row justify-content-center">
               <div className="col-lg-8">
                 <div className="banner-inner text-center">
-                  <p>
-                    Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit
-                    amet,
-                  </p>
+                  <p>The Real Estate Marketplace</p>
                   <div className="line" />
                   <h2>The Best Way To Find Your Perfect Home</h2>
                 </div>
@@ -29,9 +26,9 @@ class Banner extends Component {
                       <div className="single-select-inner">
                         <select defaultValue={0}>
                           <option value={0}>Loctaion</option>
-                          <option value={1}>Lahore</option>
-                          <option value={2}>Islamabad</option>
-                          <option value={3}>Multan</option>
+                          <option value={1}>Allahabad</option>
+                          <option value={2}>Delhi</option>
+                          <option value={3}>Lucknow</option>
                         </select>
                       </div>
                     </div>

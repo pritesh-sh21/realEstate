@@ -41,7 +41,7 @@ class Navbar extends Component {
                         src={publicUrl + "assets/img/icon/location.png"}
                         alt="img"
                       />{" "}
-                      {this.state.ContactUs.location}
+                      Allahabad, India
                     </p>
                   </li>
                   <li>
@@ -50,7 +50,7 @@ class Navbar extends Component {
                         src={publicUrl + "assets/img/icon/phone.png"}
                         alt="img"
                       />{" "}
-                      {this.state.ContactUs.phoneNumber1}
+                      +9179XXXXXXXX
                     </p>
                   </li>
                   <li>
@@ -59,7 +59,7 @@ class Navbar extends Component {
                         src={publicUrl + "assets/img/icon/envelope.png"}
                         alt="img"
                       />{" "}
-                      {this.state.ContactUs.email}
+                      realestate@gmail.com
                     </p>
                   </li>
                 </ul>
@@ -103,7 +103,8 @@ class Navbar extends Component {
             </div>
             <div className="logo">
               <Link to="/">
-                <img src={publicUrl + "assets/img/logo.png"} alt="img" />
+                Real Estate Marketplace
+                {/* <img src={publicUrl + "assets/img/logo.png"} alt="img" /> */}
               </Link>
             </div>
             <div className="nav-right-part nav-right-part-mobile">
@@ -150,6 +151,9 @@ class Navbar extends Component {
                     </li>
                     <li>
                       <Link to="/sign-in">Sign In</Link>
+                    </li>
+                    <li>
+                      <Link to="/register">Register</Link>
                     </li>
                     <li>
                       <Link to="/add-property">Add Property</Link>

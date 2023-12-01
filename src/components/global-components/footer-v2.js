@@ -42,7 +42,7 @@ class Footer_v2 extends Component {
         className="footer-area style-two mg-top-100 go-top"
         style={{ background: "url(" + publicUrl + "assets/img/other/1.png)" }}
       >
-        <div className="footer-top">
+        {/* <div className="footer-top">
           <div className="container">
             <div className="row">
               <div className="col-lg-6 col-md-4">
@@ -76,7 +76,7 @@ class Footer_v2 extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="footer-middle">
           <div className="container">
             <div className="row">
@@ -85,16 +85,13 @@ class Footer_v2 extends Component {
                   <h4 className="widget-title">Contact Us</h4>
                   <div className="details">
                     <p>
-                      <i className="fas fa-map-marker-alt" />{" "}
-                      {this.state.ContactUs.location}
+                      <i className="fas fa-map-marker-alt" /> Allahabad, India
                     </p>
                     <p>
-                      <i className="fas fa-phone-volume" />{" "}
-                      {this.state.ContactUs.phoneNumber1}
+                      <i className="fas fa-phone-volume" /> +9179XXXXXXXX
                     </p>
                     <p>
-                      <i className="fas fa-envelope" />{" "}
-                      {this.state.ContactUs.email}
+                      <i className="fas fa-envelope" /> realestate@gmail.com
                     </p>
                   </div>
                 </div>

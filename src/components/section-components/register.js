@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import axios from "axios";
-class SignIn extends Component {
+import { Navigate } from "react-router-dom";
+
+class Register extends Component {
   constructor(props) {
     super(props);
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       username: "",
       password: "",
+      email: "", // Added email field to the state
     };
   }
 
@@ -32,23 +36,28 @@ class SignIn extends Component {
     });
   }
 
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value,
+    });
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
     const Admin = {
       username: this.state.username,
       password: this.state.password,
+      email: this.state.email, // Added email to the Admin object
     };
 
     axios
-      .post("http://localhost:5000/Admin/login", Admin)
+      .post("http://localhost:5000/Admin/register", Admin)
       .then((res) => {
-        console.log(res);
-        const authToken = res.data.token;
-        localStorage.setItem("authToken", authToken);
-        // if (res.status == 200) {
-        //   window.location.href = "/";
-        // }
+        alert("Registration Successful");
+        if (res.status == 200) {
+          window.location.href = "/";
+        }
       })
       .catch((res) => alert(res.data));
   }
@@ -65,6 +74,17 @@ class SignIn extends Component {
                     <label className="single-input-inner style-bg-border">
                       <input
                         type="text"
+                        placeholder="Email"
+                        value={this.state.email}
+                        onChange={this.onChangeEmail}
+                        required
+                      />
+                    </label>
+                  </div>
+                  <div className="col-12">
+                    <label className="single-input-inner style-bg-border">
+                      <input
+                        type="text"
                         placeholder="Username"
                         value={this.state.username}
                         onChange={this.onChangeUsername}
@@ -76,7 +96,7 @@ class SignIn extends Component {
                   <div className="col-12">
                     <label className="single-input-inner style-bg-border">
                       <input
-                        type="text"
+                        type="password"
                         placeholder="Password"
                         value={this.state.password}
                         onChange={this.onChangePassword}
@@ -84,16 +104,14 @@ class SignIn extends Component {
                       />
                     </label>
                   </div>
+
                   <div className="col-12 mb-4">
                     <button
                       className="btn btn-base w-100"
                       onClick={this.onSubmit}
                     >
-                      Sign In
+                      Register
                     </button>
-                  </div>
-                  <div className="col-12">
-                    <a href="#">Forgotten Your Password</a>
                   </div>
                 </div>
               </form>
@@ -105,4 +123,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default Register;

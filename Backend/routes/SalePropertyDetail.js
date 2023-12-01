@@ -9,6 +9,7 @@ router.route("/").get((req, res) => {
 
 router.route("/property-details-sale/:id").get(function (req, res) {
   const id = req.params.id;
+  console.log(id, "wejfhfjdh");
   SalePropertyDB.findById(id, function (err, property) {
     if (!property) {
       return res.json("Property not found :(").end();

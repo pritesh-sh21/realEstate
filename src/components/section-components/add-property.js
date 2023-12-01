@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import '../style.css';
 import { WithContext as ReactTags } from "react-tag-input";
+import { useEffect } from "react";
 
 export default function SubmitPropertyRequest(props) {
   let navigate = useNavigate();
@@ -74,11 +75,13 @@ export default function SubmitPropertyRequest(props) {
     console.log(property);
     axios
       .post(
-        "http://localhost:4000/SubmittedPropertyRequests/create-propertyRequest",
+        "http://localhost:5000/SubmittedPropertyRequests/create-propertyRequest",
         property
       )
       .then((res) => {
+        console.log(res);
         alert("Property submitted Successfully");
+        navigate("/");
       })
       .catch((res) => alert("An unexpected Error occured: " + res.data));
   }
@@ -338,19 +341,46 @@ export default function SubmitPropertyRequest(props) {
           </Col>
         </Form.Group>
 
-        <Form.Group as={Row} className="mb-3">
+        {/* <Form.Group as={Row} className="mb-3">
           <Form.Label column sm={{ span: 3, offset: 1 }}>
             <strong>Category of Property:</strong>
           </Form.Label>
           <Col sm={6}>
             <Form.Select
-              onChange={(e) => setPropertyCategory(e.target.value)}
+              onSelect={(e) => {
+                console.log("Selected value:");
+                setPropertyCategory(e.target.value);
+              }}
               value={PropertyCategory}
             >
               <option value="">Select Property Category</option>
               <option value="ForSale">For Sale Property</option>
               <option value="ForRent">For Rent Property</option>
             </Form.Select>
+          </Col>
+        </Form.Group> */}
+
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm={{ span: 3, offset: 1 }}>
+            <strong>Category of Property:</strong>
+          </Form.Label>
+          <Col sm={6}>
+            <Form.Check
+              type="radio"
+              id="forSale"
+              label="For Sale Property"
+              value="ForSale"
+              checked={PropertyCategory === "ForSale"}
+              onChange={(e) => setPropertyCategory(e.target.value)}
+            />
+            <Form.Check
+              type="radio"
+              id="forRent"
+              label="For Rent Property"
+              value="ForRent"
+              checked={PropertyCategory === "ForRent"}
+              onChange={(e) => setPropertyCategory(e.target.value)}
+            />
           </Col>
         </Form.Group>
 

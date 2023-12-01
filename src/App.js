@@ -14,7 +14,7 @@ import SignIn from "./components/sign-in";
 import MapPage from "./components/map";
 import AddProperty from "./components/add-property";
 import Contact from "./components/contact";
-
+import Register from "./components/Register";
 function App() {
   return (
     <Router>
@@ -27,6 +27,7 @@ function App() {
           <Route path="/gallery" exact element={<Gallery />} />
           <Route path="/team" exact element={<Team />} />
           <Route path="/office-map" exact element={<MapPage />} />
+          <Route path="/register" exact element={<Register />} />
           <Route
             path="/property-for-sale"
             exact
