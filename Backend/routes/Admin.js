@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const salt = bcrypt.genSaltSync(10);
 const secret = "bhjbdjwj3b34b43bhj42jjsjjhbjdcjwa";
+const cookieParser = require("cookie-parser");
 
 router.route("/login").post(async (req, res) => {
   const { username, password } = req.body;
@@ -12,15 +13,15 @@ router.route("/login").post(async (req, res) => {
   const passOk = bcrypt.compareSync(password, userDoc.password); // true-if pass matches else false
   if (passOk) {
     // logged in
-    jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
-      if (err) throw err;
-      console.log(token);
-      res.status(200).json({
-        token,
-        id: userDoc._id,
-        username,
-      });
+    const token = jwt.sign({ username, id: userDoc._id }, secret, {
+      expiresIn: "2h",
     });
+    const options = {
+      expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    };
+    console.log("hello", userDoc);
+    res.status(200).cookie("token", token, options).json(userDoc);
   } else {
     res.status(404).json("wrong credentials");
   }
@@ -30,13 +31,11 @@ router.route("/register").post(async (req, res) => {
   console.log(req.body);
   const { username, password } = req.body;
   try {
-    // to handle unique users registration, use try-catch
     const userDoc = await AdminDB.create({
       username,
       password: bcrypt.hashSync(password, salt),
     });
     res.json(userDoc);
-    console.log(userDoc);
   } catch (error) {
     res.status(400).json(error);
   }

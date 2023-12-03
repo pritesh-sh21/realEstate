@@ -15,43 +15,46 @@ import MapPage from "./components/map";
 import AddProperty from "./components/add-property";
 import Contact from "./components/contact";
 import Register from "./components/Register";
+import { UserContextProvider } from "./UserContext";
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" exact element={<HomeV1 />} />
-          <Route path="/sign-in" exact element={<SignIn />} />
-          <Route path="/contact" exact element={<Contact />} />
-          <Route path="/about" exact element={<About />} />
-          <Route path="/gallery" exact element={<Gallery />} />
-          <Route path="/team" exact element={<Team />} />
-          <Route path="/office-map" exact element={<MapPage />} />
-          <Route path="/register" exact element={<Register />} />
-          <Route
-            path="/property-for-sale"
-            exact
-            element={<PropertyForSale />}
-          />
-          <Route
-            path="/property-for-rent"
-            exact
-            element={<PropertyForRent />}
-          />
-          <Route path="/add-property" exact element={<AddProperty />} />
-          <Route
-            path="/property-details-rent"
-            exact
-            element={<PropertyDetailsRent />}
-          />
-          <Route
-            path="/property-details-sale"
-            exact
-            element={<PropertyDetailsSale />}
-          />
-        </Routes>
-      </div>
-    </Router>
+    <UserContextProvider>
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path="/" exact element={<HomeV1 />} />
+            <Route path="/sign-in" exact element={<SignIn />} />
+            <Route path="/contact" exact element={<Contact />} />
+            <Route path="/about" exact element={<About />} />
+            <Route path="/gallery" exact element={<Gallery />} />
+            <Route path="/team" exact element={<Team />} />
+            <Route path="/office-map" exact element={<MapPage />} />
+            <Route path="/register" exact element={<Register />} />
+            <Route
+              path="/property-for-sale"
+              exact
+              element={<PropertyForSale />}
+            />
+            <Route
+              path="/property-for-rent"
+              exact
+              element={<PropertyForRent />}
+            />
+            <Route path="/add-property" exact element={<AddProperty />} />
+            <Route
+              path="/property-details-rent"
+              exact
+              element={<PropertyDetailsRent />}
+            />
+            <Route
+              path="/property-details-sale"
+              exact
+              element={<PropertyDetailsSale />}
+            />
+          </Routes>
+        </div>
+      </Router>
+    </UserContextProvider>
   );
 }
 

@@ -1,13 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 // import '../style.css';
 import { WithContext as ReactTags } from "react-tag-input";
+
 import { useEffect } from "react";
+import { UserContext } from "../../UserContext";
 
 export default function SubmitPropertyRequest(props) {
+  const { userInfo } = useContext(UserContext);
+
   let navigate = useNavigate();
+  useEffect(() => {
+    if (!userInfo || Object.keys(userInfo).length === 0) {
+      console.log(userInfo);
+
+      // User is not signed in, show sign-in page or alert
+      alert("Sign in first");
+      // Render your sign-in page component here
+      navigate("/sign-in");
+    }
+  }, []);
 
   let [PropertyTitle, setPropertyTitle] = useState("");
   let [PropertyTagline, setPropertyTagline] = useState("");

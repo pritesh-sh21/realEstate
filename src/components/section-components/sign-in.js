@@ -1,108 +1,73 @@
-import React, { Component } from "react";
-import axios from "axios";
-class SignIn extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-
-    this.state = {
-      username: "",
-      password: "",
-    };
-  }
-
-  componentDidMount() {
-    const $ = window.$;
-
-    $("body").addClass("bg-gray");
-  }
-
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value,
-    });
-  }
-
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value,
-    });
-  }
-
-  onSubmit(e) {
+import React, { useContext, useState } from "react";
+import { UserContext } from "../../UserContext.js";
+import { Link, useNavigate } from "react-router-dom";
+const SignIn = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { userInfo, setUserInfo } = useContext(UserContext);
+  let navigate = useNavigate();
+  async function handleSubmit(e) {
     e.preventDefault();
-
-    const Admin = {
-      username: this.state.username,
-      password: this.state.password,
-    };
-
-    axios
-      .post("http://localhost:5000/Admin/login", Admin)
-      .then((res) => {
-        console.log(res);
-        const authToken = res.data.token;
-        localStorage.setItem("authToken", authToken);
-        // if (res.status == 200) {
-        //   window.location.href = "/";
-        // }
-      })
-      .catch((res) => alert(res.data));
+    const response = await fetch("http://localhost:5000/Admin/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+      headers: { "Content-type": "application/json" },
+    });
+    if (response.ok) {
+      response.json().then((x) => {
+        setUserInfo(x.username);
+        alert("Signed in successfully");
+        navigate("/");
+      });
+    } else {
+      alert("wrong credentials");
+    }
   }
-
-  render() {
-    return (
-      <div className="signin-page-area pd-top-100 ">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-xl-6 col-lg-7">
-              <form className="signin-inner">
-                <div className="row">
-                  <div className="col-12">
-                    <label className="single-input-inner style-bg-border">
-                      <input
-                        type="text"
-                        placeholder="Username"
-                        value={this.state.username}
-                        onChange={this.onChangeUsername}
-                        required
-                      />
-                    </label>
-                  </div>
-
-                  <div className="col-12">
-                    <label className="single-input-inner style-bg-border">
-                      <input
-                        type="text"
-                        placeholder="Password"
-                        value={this.state.password}
-                        onChange={this.onChangePassword}
-                        required
-                      />
-                    </label>
-                  </div>
-                  <div className="col-12 mb-4">
-                    <button
-                      className="btn btn-base w-100"
-                      onClick={this.onSubmit}
-                    >
-                      Sign In
-                    </button>
-                  </div>
-                  <div className="col-12">
-                    <a href="#">Forgotten Your Password</a>
-                  </div>
+  return (
+    <div className="signin-page-area pd-top-50 ">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-xl-6 col-lg-7">
+            <form className="signin-inner">
+              <div className="row">
+                <div className="col-12">
+                  <label className="single-input-inner style-bg-border">
+                    <input
+                      type="text"
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                    />
+                  </label>
                 </div>
-              </form>
-            </div>
+
+                <div className="col-12">
+                  <label className="single-input-inner style-bg-border">
+                    <input
+                      type="text"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </label>
+                </div>
+                <div className="col-12 mb-4">
+                  <button className="btn btn-base w-100" onClick={handleSubmit}>
+                    Sign In
+                  </button>
+                </div>
+                <div className="col-12">
+                  <Link to="/register">Not Registered?</Link>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default SignIn;

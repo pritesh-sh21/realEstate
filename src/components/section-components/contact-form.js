@@ -43,7 +43,7 @@ class ContactForm extends Component {
                 <div className="row">
                   <div className="col-md-6">
                     <div className="contact-single-list">
-                      <h5>Allahabad Office</h5>
+                      <h5>Delhi Office</h5>
                       <ul>
                         <li>
                           <img
